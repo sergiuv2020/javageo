@@ -3,7 +3,7 @@ package org.javatraining;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Created by MariutaSergiu on 5/4/2015.
+ * Created by svidrascu on 5/4/2015.
  */
 public class Pentagon extends Poligoane implements Formule,ClubulFormelorCongruente {
 
@@ -33,5 +33,9 @@ public class Pentagon extends Poligoane implements Formule,ClubulFormelorCongrue
 
     public void rotate() {
         System.out.println("BOOOOOM !!!");
+    }
+
+    public void metodaSpecificaPentagon() {
+
     }
 }

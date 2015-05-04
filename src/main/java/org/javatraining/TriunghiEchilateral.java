@@ -1,9 +1,7 @@
 package org.javatraining;
 
-import org.apache.commons.lang3.StringUtils;
-
 /**
- * Created by MariutaSergiu on 5/5/2015.
+ * Created by svidrascu on 5/5/2015.
  */
 public class TriunghiEchilateral extends Triunghi implements ClubulFormelorCongruente {
 
@@ -23,5 +21,9 @@ public class TriunghiEchilateral extends Triunghi implements ClubulFormelorCongr
 
     public void rotate() {
         System.out.println("vrrrrrr !!!");
+    }
+
+    public void metodaSpecificaTriunghiEchilateral() {
+
     }
 }

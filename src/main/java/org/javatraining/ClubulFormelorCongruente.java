@@ -1,7 +1,7 @@
 package org.javatraining;
 
 /**
- * Created by MariutaSergiu on 5/5/2015.
+ * Created by svidrascu on 5/5/2015.
  */
 public interface ClubulFormelorCongruente {
 

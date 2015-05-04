@@ -3,7 +3,7 @@ package org.javatraining;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Created by MariutaSergiu on 5/4/2015.
+ * Created by svidrascu on 5/4/2015.
  */
 public class Triunghi extends Poligoane implements Formule {
 
@@ -21,5 +21,9 @@ public class Triunghi extends Poligoane implements Formule {
         System.out.println("Formula magica pentru calculat perimetrul unui " +
                 StringUtils.substringAfter(this.getClass().toString(),"javatraining.") );
         return 6;
+    }
+
+    public void metodaSpecificaTriunghi() {
+
     }
 }

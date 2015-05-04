@@ -1,7 +1,7 @@
 package org.javatraining;
 
 /**
- * Created by MariutaSergiu on 5/5/2015.
+ * Created by svidrascu on 5/5/2015.
  */
 public class Patrat extends Patrulater implements ClubulFormelorCongruente {
 
@@ -18,5 +18,8 @@ public class Patrat extends Patrulater implements ClubulFormelorCongruente {
         System.out.println("zuuuup !!!");
     }
 
+    public void metodaSpecificaPatrat() {
+
+    }
 
 }

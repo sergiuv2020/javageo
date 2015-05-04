@@ -3,10 +3,8 @@ package org.javatraining;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.Random;
-
 /**
- * Created by MariutaSergiu on 5/4/2015.
+ * Created by svidrascu on 5/4/2015.
  */
 public class Hexagon extends Poligoane implements Formule,ClubulFormelorCongruente {
 
@@ -36,5 +34,9 @@ public class Hexagon extends Poligoane implements Formule,ClubulFormelorCongruen
 
     public void rotate() {
         System.out.println("BOOOOOM !!!");
+    }
+
+    public void metodaSpecificaHexagon() {
+
     }
 }
