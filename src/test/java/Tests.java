@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Tests {
 
     @Test
-    public void testFormule() {
+    public void testFormuleCalcul() {
         ArrayList<Formule> formule = new ArrayList<Formule>();
         formule.add(new Hexagon());
         formule.add(new Triunghi());
