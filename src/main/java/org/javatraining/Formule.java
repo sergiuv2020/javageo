@@ -5,5 +5,6 @@ package org.javatraining;
  */
 public interface Formule {
     Integer calculeazaAria();
+
     Integer calculeazaPerimetrul();
 }
