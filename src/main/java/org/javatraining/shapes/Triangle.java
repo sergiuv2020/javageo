@@ -1,14 +1,15 @@
-package org.javatraining;
+package org.javatraining.shapes;
 
 import org.apache.commons.lang3.StringUtils;
+import org.javatraining.IComputable;
 
 /**
  * Created by svidrascu on 5/4/2015.
  */
-public class Pentagon extends Poligoane implements Formule,ClubulFormelorCongruente {
+public class Triangle extends AbstractPolygon implements IComputable {
 
-    final public void cateLaturiAmEuOare() {
-        System.out.println("Eu am cinci sa traiti !!!");
+    final public String cateLaturiAmEuOare() {
+        return "Eu am trei sa traiti !!!";
     }
 
     public Integer calculeazaAria() {
@@ -23,19 +24,7 @@ public class Pentagon extends Poligoane implements Formule,ClubulFormelorCongrue
         return 6;
     }
 
-    public void dance() {
-        System.out.println("Bamboleooooooo bamboleaaaa");
-    }
-
-    public void explode() {
-        System.out.println("BOOOOOOM !!!");
-    }
-
-    public void rotate() {
-        System.out.println("BOOOOOM !!!");
-    }
-
-    public void metodaSpecificaPentagon() {
+    public void metodaSpecificaTriunghi() {
 
     }
 }

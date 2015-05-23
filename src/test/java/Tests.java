@@ -1,4 +1,6 @@
-import org.javatraining.*;
+import org.javatraining.IComputable;
+import org.javatraining.ICongruentClub;
+import org.javatraining.shapes.*;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -10,13 +12,13 @@ public class Tests {
 
     @Test
     public void testFormuleCalcul() {
-        ArrayList<Formule> formule = new ArrayList<Formule>();
-        formule.add(new Hexagon());
-        formule.add(new Triunghi());
-        formule.add(new Pentagon());
-        formule.add(new TriunghiEchilateral());
+        ArrayList<IComputable> IComputable = new ArrayList<IComputable>();
+        IComputable.add(new Hexagon());
+        IComputable.add(new Triangle());
+        IComputable.add(new Pentagon());
+        IComputable.add(new TriangleEquilateral());
 
-        for (Formule element : formule) {
+        for (IComputable element : IComputable) {
             element.calculeazaAria();
             element.calculeazaPerimetrul();
         }
@@ -24,26 +26,26 @@ public class Tests {
 
     @Test
     public void testPoligoane() {
-        ArrayList<Poligoane> poligoane = new ArrayList<Poligoane>();
-        poligoane.add(new Hexagon());
-        poligoane.add(new Triunghi());
-        poligoane.add(new Pentagon());
-        poligoane.add(new TriunghiEchilateral());
+        ArrayList<AbstractPolygon> abstractPolygon = new ArrayList<AbstractPolygon>();
+        abstractPolygon.add(new Hexagon());
+        abstractPolygon.add(new Triangle());
+        abstractPolygon.add(new Pentagon());
+        abstractPolygon.add(new TriangleEquilateral());
 
-        for (Poligoane element : poligoane) {
+        for (AbstractPolygon element : abstractPolygon) {
             element.cateLaturiAmEuOare();
         }
     }
 
     @Test
     public void testParty() {
-        ArrayList<ClubulFormelorCongruente> party = new ArrayList<ClubulFormelorCongruente>();
+        ArrayList<ICongruentClub> party = new ArrayList<ICongruentClub>();
         party.add(new Hexagon());
-        party.add(new Patrat());
+        party.add(new Square());
         party.add(new Pentagon());
-        party.add(new TriunghiEchilateral());
+        party.add(new TriangleEquilateral());
 
-        for (ClubulFormelorCongruente element : party) {
+        for (ICongruentClub element : party) {
             element.dance();
             element.explode();
             element.rotate();

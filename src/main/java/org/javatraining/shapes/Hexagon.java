@@ -1,15 +1,17 @@
-package org.javatraining;
+package org.javatraining.shapes;
 
 
 import org.apache.commons.lang3.StringUtils;
+import org.javatraining.IComputable;
+import org.javatraining.ICongruentClub;
 
 /**
  * Created by svidrascu on 5/4/2015.
  */
-public class Hexagon extends Poligoane implements Formule,ClubulFormelorCongruente {
+public class Hexagon extends AbstractPolygon implements IComputable, ICongruentClub {
 
-    final public void cateLaturiAmEuOare() {
-        System.out.println("Eu am SHASE sa traiti !!!");
+    final public String cateLaturiAmEuOare() {
+        return "Eu am SHASE sa traiti !!!";
     }
 
     public Integer calculeazaAria() {
@@ -24,16 +26,16 @@ public class Hexagon extends Poligoane implements Formule,ClubulFormelorCongruen
         return 6;
     }
 
-    public void dance() {
-        System.out.println("Bamboleooooooo bamboleaaaa");
+    public String dance() {
+        return "Bamboleooooooo bamboleaaaa";
     }
 
-    public void explode() {
-        System.out.println("BOOOOOOM !!!");
+    public String explode() {
+        return "BOOOOOOM !!!";
     }
 
-    public void rotate() {
-        System.out.println("BOOOOOM !!!");
+    public String rotate() {
+        return "BOOOOOM !!!";
     }
 
     public void metodaSpecificaHexagon() {
