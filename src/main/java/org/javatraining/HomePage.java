@@ -21,42 +21,90 @@ public class HomePage {
     }
 
     @RequestMapping("/")
-    String home() {
+    String home() throws CannotFormShape {
         ArrayList<AbstractPolygon> abstractPolygons = new ArrayList<AbstractPolygon>();
-        abstractPolygons.add(new Hexagon());
-        abstractPolygons.add(new Triangle());
-        abstractPolygons.add(new Pentagon());
-        abstractPolygons.add(new TriangleEquilateral());
+        abstractPolygons.add(new Hexagon(2, 2, 2, 2, 2, 2));
+        abstractPolygons.add(new Square(7, 7, 7, 7));
+        abstractPolygons.add(new Pentagon(5, 5, 5, 5, 5));
+        abstractPolygons.add(new TriangleEquilateral(6, 6, 6));
 
         String text = "";
 
         for (AbstractPolygon abstractPolygon : abstractPolygons) {
-            text = text + StringUtils.substringAfter(abstractPolygon.getClass().toString(), "javatraining.") + " " + abstractPolygon.cateLaturiAmEuOare() + "<br>";
+            text = text + StringUtils.substringAfter(abstractPolygon.getClass().toString(), "shapes.") + " " + abstractPolygon.cateLaturiAmEuOare() + "<br>";
         }
 
-        return "<i><b> This is where the magic happens !! </b></i><br><br>" + text + "<br><br> <a href=\"http://localhost:8080/club\"> Vrei sa vezi cum petrec formele ??? </a>";
+        return "<i><b> Cate laturi aveti ?!?! </b></i><br><br>" + text +
+                "<br><br> <a href=\"http://localhost:8080/club\"> Vrei sa vezi cum petrec formele ??? </a>" +
+                "<br><br> Hai sa vedem si <a href=\"http://localhost:8080/area\"> aria </a>" +
+                "sau <a href=\"http://localhost:8080/\"> perimetrul </a>";
     }
 
+    /**
+     * Client
+     */
     @RequestMapping("/club")
-    String club() {
-        ArrayList<ICongruentClub> clubMembers = new ArrayList<ICongruentClub>();
-        clubMembers.add(new Hexagon());
-        clubMembers.add(new Square());
-        clubMembers.add(new Pentagon());
-        clubMembers.add(new TriangleEquilateral());
+    String club() throws CannotFormShape {
+        Hexagon hexagon = new Hexagon(2, 2, 2, 2, 2, 2);
+        TriangleEquilateral triunghi = new TriangleEquilateral(6, 6, 6);
+        Pentagon pentagon = new Pentagon(5, 5, 5, 5, 5);
+        Square square = new Square(7, 7, 7, 7);
+
+        CompositeParty majorParty = new CompositeParty();
+        CompositeParty party1 = new CompositeParty();
+        CompositeParty party2 = new CompositeParty();
+
+        party1.add(triunghi);
+        party1.add(hexagon);
+
+        party2.add(pentagon);
+        party2.add(square);
+
+        majorParty.add(party1);
+        majorParty.add(party2);
 
         String text = "<b><i> PARTYYYYYYY !!!! </i></b> <br>";
 
-        for (ICongruentClub clubMember : clubMembers) {
-            text = text + StringUtils.substringAfter(clubMember.getClass().toString(), "javatraining.") + " " + clubMember.dance() + "<br>";
-            text = text +
-                    StringUtils.substringAfter(clubMember.getClass().toString(), "javatraining.") +
-                    " " + clubMember.rotate() + "<br>";
-            text = text +
-                    StringUtils.substringAfter(clubMember.getClass().toString(), "javatraining.") +
-                    " " + clubMember.explode() + "<br>";
-        }
+
+        text = text + " " + majorParty.dance() + "<br>";
+        text = text + " " + majorParty.rotate() + "<br>";
+        text = text + " " + majorParty.explode() + "<br>";
+
 
         return text + "<br><br> <a href=\"http://localhost:8080/\"> Back to the booooooring stuff. </a>";
+    }
+
+    @RequestMapping("/area")
+    String area() throws CannotFormShape {
+        ArrayList<IComputable> computables = new ArrayList<IComputable>();
+        computables.add(new Hexagon(2, 2, 2, 2, 2, 2));
+        computables.add(new Pentagon(5, 5, 5, 5, 5));
+        computables.add(new TriangleEquilateral(6, 6, 6));
+        computables.add(new Square(7, 7, 7, 7));
+        String text = "<b><i> PARTYYYYYYY !!!! </i></b> <br>";
+        for (IComputable computable : computables) {
+            text = text + StringUtils.substringAfter(computable.getClass().toString(), "shapes.") + " " + computable.calculateArea() + "<br>";
+        }
+
+        return "<i><b> Si aria ?!?! </b></i><br><br>" + text +
+                "<br><br> <a href=\"http://localhost:8080/perimeter\"> Hai sa vedem si Perimetrul </a>" +
+                "<br><br> <a href=\"http://localhost:8080/\"> Hai napoi acasa... </a>";
+    }
+
+    @RequestMapping("/perimeter")
+    String perimeter() throws CannotFormShape {
+        ArrayList<IComputable> computables = new ArrayList<IComputable>();
+        computables.add(new Hexagon(2, 2, 2, 2, 2, 2));
+        computables.add(new Pentagon(5, 5, 5, 5, 5));
+        computables.add(new TriangleEquilateral(6, 6, 6));
+        computables.add(new Square(7, 7, 7, 7));
+        String text = "<b><i> PARTYYYYYYY !!!! </i></b> <br>";
+        for (IComputable computable : computables) {
+            text = text + StringUtils.substringAfter(computable.getClass().toString(), "shapes.") + " " + computable.calculatePerimeter() + "<br>";
+        }
+
+        return "<i><b> Si Perimetrul ?!?! </b></i><br><br>" + text +
+                "<br><br> <a href=\"http://localhost:8080/area\"> Hai sa vedem si aria </a>" +
+                "<br><br> <a href=\"http://localhost:8080/\"> Hai napoi acasa... </a>";
     }
 }

@@ -1,43 +1,44 @@
 package org.javatraining.shapes;
 
 import org.apache.commons.lang3.StringUtils;
+import org.javatraining.CannotFormShape;
 import org.javatraining.IComputable;
 import org.javatraining.ICongruentClub;
 
 /**
  * Created by svidrascu on 5/4/2015.
  */
+
+/**
+ * "Leaf"
+ */
 public class Pentagon extends AbstractPolygon implements IComputable, ICongruentClub {
 
-    final public String cateLaturiAmEuOare() {
-        return "Eu am cinci sa traiti !!!";
+    private double side1;
+
+    public Pentagon(double side1, double side2, double side3, double side4, double side5) throws CannotFormShape {
+        super(side1, side2, side3, side4, side5);
+        if (side1 != side2 || side2 != side3 || side3 != side4 || side4 != side5) {
+            throw new CannotFormShape("This cannot be a pentagon, it doesnt have 5 equal sides");
+        }
+        this.side1 = side1;
     }
 
-    public Integer calculeazaAria() {
+    public double calculateArea() {
         System.out.println("Formula magica pentru calculat aria unui " +
-                StringUtils.substringAfter(this.getClass().toString(), "javatraining.") );
-        return 60;
-    }
-
-    public Integer calculeazaPerimetrul() {
-        System.out.println("Formula magica pentru calculat perimetrul unui " +
-                StringUtils.substringAfter(this.getClass().toString(),"javatraining.") );
-        return 6;
+                StringUtils.substringAfter(this.getClass().toString(), "shapes."));
+        return 555;
     }
 
     public String dance() {
-        return "Bamboleooooooo bamboleaaaa";
+        return "Bamboleooooooo bamboleaaaa<br>";
     }
 
     public String explode() {
-        return "BOOOOOOM !!!";
+        return "BOOOOOOM !!!<br>";
     }
 
     public String rotate() {
-        return "BOOOOOM !!!";
-    }
-
-    public void metodaSpecificaPentagon() {
-
+        return "zaaap !!!<br>";
     }
 }
