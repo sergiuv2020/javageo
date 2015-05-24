@@ -1,5 +1,6 @@
 package org.javatraining.shapes;
 
+import org.javatraining.CannotFormShape;
 import org.javatraining.IComputable;
 import org.junit.Test;
 
@@ -37,7 +38,6 @@ public class IComputableTest {
         assertThat("Number of sides is not correct", computables.get(2).calculatePerimeter(), closeTo(25.0, 0.0));
         assertThat("Number of sides is not correct", computables.get(3).calculatePerimeter(), closeTo(12.0, 0.0));
 
-
     }
 
     @Test
@@ -52,7 +52,25 @@ public class IComputableTest {
         assertThat("Number of sides is not correct", square.cateLaturiAmEuOare(), containsString("4"));
         assertThat("Number of sides is not correct", pentagon.cateLaturiAmEuOare(), containsString("5"));
         assertThat("Number of sides is not correct", hexagon.cateLaturiAmEuOare(), containsString("6"));
+    }
 
+    @Test(expected = CannotFormShape.class)
+    public void testTriangleNotPoligon() throws CannotFormShape {
+        AbstractPolygon triangle = new TriangleEquilateral(6, 6, 20);
+    }
 
+    @Test(expected = CannotFormShape.class)
+    public void testTriangleZeroOnSide() throws CannotFormShape {
+        AbstractPolygon triangle1 = new Pentagon(6, 6, 0, 6, 6);
+    }
+
+    @Test(expected = CannotFormShape.class)
+    public void testTriangleNotAllEqual() throws CannotFormShape {
+        AbstractPolygon triangle1 = new Hexagon(6, 3, 5, 6, 6, 4);
+    }
+
+    @Test(expected = CannotFormShape.class)
+    public void testTriangleNegativeSide() throws CannotFormShape {
+        AbstractPolygon triangle1 = new Square(6, -6, 6, 6);
     }
 }
