@@ -2,9 +2,8 @@ package org.javatraining.shapes;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.CannotFormShape;
-import org.javatraining.IComputable;
 import org.javatraining.ICongruentClub;
+import org.javatraining.exceptions.CannotFormShape;
 
 /**
  * Created by svidrascu on 5/4/2015.
@@ -13,7 +12,7 @@ import org.javatraining.ICongruentClub;
 /**
  * "Leaf"
  */
-public class Hexagon extends AbstractPolygon implements IComputable, ICongruentClub {
+public class Hexagon extends AbstractPolygon implements ICongruentClub {
 
     private double side1;
 

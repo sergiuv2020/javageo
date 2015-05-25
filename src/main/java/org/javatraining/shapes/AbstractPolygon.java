@@ -2,7 +2,10 @@ package org.javatraining.shapes;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.CannotFormShape;
+import org.javatraining.IComputable;
+import org.javatraining.exceptions.CannotFormShape;
+import org.javatraining.visitor.IShapeElement;
+import org.javatraining.visitor.IShapeVisitor;
 
 import java.util.ArrayList;
 
@@ -13,7 +16,8 @@ import java.util.ArrayList;
 /**
  * "Composite"
  */
-public abstract class AbstractPolygon {
+public abstract class AbstractPolygon implements IShapeElement, IComputable {
+
 
     private ArrayList<Double> poligonSides = new ArrayList<Double>();
 
@@ -42,6 +46,14 @@ public abstract class AbstractPolygon {
             rezultat = rezultat + poligonSide;
         }
         return rezultat;
+    }
+
+    public double calculateArea() {
+        return 0;
+    }
+
+    public void serialize(IShapeVisitor visitor) throws CannotFormShape {
+        visitor.visit(this);
     }
 
     final public String cateLaturiAmEuOare() {

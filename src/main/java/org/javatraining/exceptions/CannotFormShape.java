@@ -1,4 +1,4 @@
-package org.javatraining;
+package org.javatraining.exceptions;
 
 /**
  * Created by Sergiu Vidrascu on 5/23/15.

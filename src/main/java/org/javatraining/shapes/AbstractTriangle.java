@@ -1,13 +1,12 @@
 package org.javatraining.shapes;
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.CannotFormShape;
-import org.javatraining.IComputable;
+import org.javatraining.exceptions.CannotFormShape;
 
 /**
  * Created by svidrascu on 5/4/2015.
  */
-public abstract class AbstractTriangle extends AbstractPolygon implements IComputable {
+public abstract class AbstractTriangle extends AbstractPolygon {
     private double side3;
     private double side1;
     private double side2;

@@ -1,4 +1,6 @@
-package org.javatraining;
+package org.javatraining.composite;
+
+import org.javatraining.ICongruentClub;
 
 import java.util.ArrayList;
 import java.util.List;

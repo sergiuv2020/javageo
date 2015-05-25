@@ -1,8 +1,10 @@
 package org.javatraining.shapes;
 
-import org.javatraining.CannotFormShape;
 import org.javatraining.IComputable;
+import org.javatraining.exceptions.CannotFormShape;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.ArrayList;
 
@@ -15,6 +17,8 @@ import static org.hamcrest.Matchers.containsString;
  * Created by Sergiu Vidrascu on 5/24/15.
  */
 public class IComputableTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testCalculateArea() throws Exception {
@@ -54,23 +58,32 @@ public class IComputableTest {
         assertThat("Number of sides is not correct", hexagon.cateLaturiAmEuOare(), containsString("6"));
     }
 
-    @Test(expected = CannotFormShape.class)
+    @Test
     public void testTriangleNotPoligon() throws CannotFormShape {
+        thrown.expect(CannotFormShape.class);
+        thrown.expectMessage("No side should be bigger than the sum of the other sides !!!");
         AbstractPolygon triangle = new TriangleEquilateral(6, 6, 20);
     }
 
-    @Test(expected = CannotFormShape.class)
+    @Test
     public void testTriangleZeroOnSide() throws CannotFormShape {
+        thrown.expect(CannotFormShape.class);
+        thrown.expectMessage("Side is below 0 !!!");
         AbstractPolygon triangle1 = new Pentagon(6, 6, 0, 6, 6);
     }
 
-    @Test(expected = CannotFormShape.class)
+    @Test
     public void testTriangleNotAllEqual() throws CannotFormShape {
+        thrown.expect(CannotFormShape.class);
+        thrown.expectMessage("This cannot be a hexagon, it doesnt have 6 equal sides");
         AbstractPolygon triangle1 = new Hexagon(6, 3, 5, 6, 6, 4);
     }
 
-    @Test(expected = CannotFormShape.class)
+    @Test
     public void testTriangleNegativeSide() throws CannotFormShape {
+        thrown.expect(CannotFormShape.class);
+        thrown.expectMessage("Side is below 0 !!!");
         AbstractPolygon triangle1 = new Square(6, -6, 6, 6);
     }
+
 }

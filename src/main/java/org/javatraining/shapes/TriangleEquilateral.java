@@ -1,7 +1,7 @@
 package org.javatraining.shapes;
 
-import org.javatraining.CannotFormShape;
 import org.javatraining.ICongruentClub;
+import org.javatraining.exceptions.CannotFormShape;
 
 
 /**

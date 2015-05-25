@@ -1,6 +1,6 @@
 package org.javatraining.shapes;
 
-import org.javatraining.CannotFormShape;
+import org.javatraining.exceptions.CannotFormShape;
 
 /**
  * Created by svidrascu on 5/4/2015.

@@ -5,13 +5,23 @@ package org.javatraining;
  */
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.javatraining.composite.CompositeParty;
+import org.javatraining.exceptions.CannotFormShape;
 import org.javatraining.shapes.*;
+import org.javatraining.visitor.ShapeSerializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @EnableAutoConfiguration
@@ -21,8 +31,8 @@ public class HomePage {
     }
 
     @RequestMapping("/")
-    String home() throws CannotFormShape {
-        ArrayList<AbstractPolygon> abstractPolygons = new ArrayList<AbstractPolygon>();
+    String home() throws CannotFormShape, IOException {
+        List<AbstractPolygon> abstractPolygons = new ArrayList<AbstractPolygon>();
         abstractPolygons.add(new Hexagon(2, 2, 2, 2, 2, 2));
         abstractPolygons.add(new Square(7, 7, 7, 7));
         abstractPolygons.add(new Pentagon(5, 5, 5, 5, 5));
@@ -37,7 +47,8 @@ public class HomePage {
         return "<i><b> Cate laturi aveti ?!?! </b></i><br><br>" + text +
                 "<br><br> <a href=\"http://localhost:8080/club\"> Vrei sa vezi cum petrec formele ??? </a>" +
                 "<br><br> Hai sa vedem si <a href=\"http://localhost:8080/area\"> aria </a>" +
-                "sau <a href=\"http://localhost:8080/\"> perimetrul </a>";
+                "sau <a href=\"http://localhost:8080/perimeter\"> perimetrul </a>" +
+                "<br><br> <a href=\"http://localhost:8080/shapes.json\"> GIF me magical json file with values !!! </a>";
     }
 
     /**
@@ -107,4 +118,30 @@ public class HomePage {
                 "<br><br> <a href=\"http://localhost:8080/area\"> Hai sa vedem si aria </a>" +
                 "<br><br> <a href=\"http://localhost:8080/\"> Hai napoi acasa... </a>";
     }
+
+//    @RequestMapping(value = "/files/{file_name}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public FileSystemResource getFile(@PathVariable("file_name") String fileName) throws CannotFormShape, IOException {
+//        return new FileSystemResource(fileName);
+//    }
+
+    @RequestMapping(value = "/shapes.json", method = RequestMethod.GET)
+    public void getFile(HttpServletResponse response) throws IOException, CannotFormShape {
+        List<AbstractPolygon> abstractPolygons = new ArrayList<AbstractPolygon>();
+        abstractPolygons.add(new Hexagon(2, 2, 2, 2, 2, 2));
+        abstractPolygons.add(new Square(7, 7, 7, 7));
+        abstractPolygons.add(new Pentagon(5, 5, 5, 5, 5));
+        abstractPolygons.add(new TriangleEquilateral(6, 6, 6));
+
+        ShapeSerializer savedData = new ShapeSerializer();
+        savedData.generateJsonforShapes(abstractPolygons, System.getProperty("user.dir") + "shapes");
+
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=shapes.json");
+
+        InputStream is = new FileInputStream(System.getProperty("user.dir") + "shapes.json");
+        IOUtils.copy(is, response.getOutputStream());
+        response.flushBuffer();
+    }
+
 }
