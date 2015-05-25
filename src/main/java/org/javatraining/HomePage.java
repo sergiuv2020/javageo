@@ -5,30 +5,21 @@ package org.javatraining;
  */
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.javatraining.composite.CompositeParty;
 import org.javatraining.exceptions.CannotFormShape;
 import org.javatraining.shapes.*;
 import org.javatraining.visitor.ShapeSerializer;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@EnableAutoConfiguration
 public class HomePage {
-    public static void main(String[] args) throws Exception {
-        SpringApplication.run(HomePage.class, args);
-    }
 
     @RequestMapping("/")
     String home() throws CannotFormShape, IOException {
@@ -134,13 +125,12 @@ public class HomePage {
         abstractPolygons.add(new TriangleEquilateral(6, 6, 6));
 
         ShapeSerializer savedData = new ShapeSerializer();
-        savedData.generateJsonforShapes(abstractPolygons, System.getProperty("user.dir") + "shapes");
+        byte[] shapeData = savedData.generateJsonforShapes(abstractPolygons);
 
         response.setContentType("application/octet-stream");
         response.setHeader("Content-Disposition", "attachment;filename=shapes.json");
+        response.getOutputStream().write(shapeData);
 
-        InputStream is = new FileInputStream(System.getProperty("user.dir") + "shapes.json");
-        IOUtils.copy(is, response.getOutputStream());
         response.flushBuffer();
     }
 

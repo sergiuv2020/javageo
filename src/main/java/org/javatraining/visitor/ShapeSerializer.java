@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import org.javatraining.exceptions.CannotFormShape;
 import org.javatraining.shapes.AbstractPolygon;
 
-import java.io.FileOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -27,10 +27,10 @@ public class ShapeSerializer implements IShapeVisitor {
         this.setShapeName(polygon.getClass().getSimpleName());
     }
 
-    public void generateJsonforShapes(List<AbstractPolygon> shapelist, String filename) throws IOException, CannotFormShape {
-
+    public byte[] generateJsonforShapes(List<AbstractPolygon> shapelist) throws IOException, CannotFormShape {
+        ByteArrayOutputStream bytestream = new ByteArrayOutputStream();
         JsonGenerator jsonGenerator = new JsonFactory()
-                .createGenerator(new FileOutputStream(filename + ".json"));
+                .createGenerator(bytestream);
         //for pretty printing
         jsonGenerator.setPrettyPrinter(new DefaultPrettyPrinter());
 
@@ -48,6 +48,8 @@ public class ShapeSerializer implements IShapeVisitor {
 
         jsonGenerator.flush();
         jsonGenerator.close();
+
+        return bytestream.toByteArray();
     }
 
 
