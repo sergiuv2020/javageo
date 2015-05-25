@@ -8,6 +8,7 @@ import java.util.ArrayList;
  */
 public class Tests {
 
+
     @Test
     public void testFormuleCalcul() {
         ArrayList<Formule> formule = new ArrayList<Formule>();
