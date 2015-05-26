@@ -1,7 +1,7 @@
 package org.javatraining.shapes;
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.ICongruentClub;
+import org.javatraining.CongruentShape;
 import org.javatraining.exceptions.CannotFormShape;
 
 /**
@@ -11,23 +11,19 @@ import org.javatraining.exceptions.CannotFormShape;
 /**
  * "Leaf"
  */
-public class Square extends AbstractQuadrilater implements ICongruentClub {
+public class Square extends CongruentPolygon {
 
-    private double side1;
 
-    public Square(double side1, double side2, double side3, double side4) throws CannotFormShape {
-        super(side1, side2, side3, side4);
-        if (side1 != side2 || side2 != side3 || side3 != side4) {
-            throw new CannotFormShape("This cannot be a square, it doesnt have 4 equal sides");
-        }
-        this.side1 = side1;
+    public Square(double side) throws CannotFormShape {
+        super(side , 4);
     }
 
     final public double calculateArea() {
         System.out.println("Formula magica pentru calculat aria unui " +
                 StringUtils.substringAfter(this.getClass().toString(), "shapes."));
+
         double area;
-        area = side1 * side1;
+        area = getSide() * getSide();
         return area;
     }
 
@@ -42,5 +38,6 @@ public class Square extends AbstractQuadrilater implements ICongruentClub {
     public String rotate() {
         return "zuuuup !!!<br>";
     }
+
 
 }

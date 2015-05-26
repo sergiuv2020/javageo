@@ -1,6 +1,6 @@
 package org.javatraining.shapes;
 
-import org.javatraining.ICongruentClub;
+import org.javatraining.CongruentShape;
 import org.javatraining.exceptions.CannotFormShape;
 
 
@@ -11,15 +11,10 @@ import org.javatraining.exceptions.CannotFormShape;
 /**
  * "Leaf"
  */
-public class TriangleEquilateral extends AbstractTriangle implements ICongruentClub {
-    private double side1;
+public class TriangleEquilateral extends AbstractTriangle implements CongruentShape {
 
-    public TriangleEquilateral(double side1, double side2, double side3) throws CannotFormShape {
-        super(side1, side2, side3);
-        if (side1 != side2 || side2 != side3) {
-            throw new CannotFormShape("This cannot be a equilateral triangle, it doesnt have 3 equal sides");
-        }
-        this.side1 = side1;
+    public TriangleEquilateral(double side) throws CannotFormShape {
+        super(side, side, side);
     }
 
     public String dance() {

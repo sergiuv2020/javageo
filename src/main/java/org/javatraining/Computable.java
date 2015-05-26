@@ -7,7 +7,7 @@ package org.javatraining;
 /**
  * "Component"
  */
-public interface IComputable {
+public interface Computable {
     double calculateArea();
 
     double calculatePerimeter();

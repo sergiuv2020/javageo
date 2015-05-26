@@ -1,6 +1,6 @@
 package org.javatraining.shapes;
 
-import org.javatraining.IComputable;
+import org.javatraining.Computable;
 import org.javatraining.exceptions.CannotFormShape;
 import org.junit.Rule;
 import org.junit.Test;
@@ -16,26 +16,26 @@ import static org.hamcrest.Matchers.containsString;
 /**
  * Created by Sergiu Vidrascu on 5/24/15.
  */
-public class IComputableTest {
+public class ComputableTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testCalculateArea() throws Exception {
-        IComputable square = new Square(7, 7, 7, 7);
+        Computable square = new Square(7);
         assertThat("Area calculation is not correct", square.calculateArea(), closeTo(49.0, 0.0));
 
-        IComputable triunghi = new TriangleEquilateral(6, 6, 6);
+        Computable triunghi = new TriangleEquilateral(6);
         assertThat("Area calculation is not correct", triunghi.calculateArea(), closeTo(15.588457268119896, 0.0));
     }
 
     @Test
     public void testCalculatePerimeter() throws Exception {
-        ArrayList<IComputable> computables = new ArrayList<IComputable>();
-        computables.add(new TriangleEquilateral(6, 6, 6));
-        computables.add(new Square(7, 7, 7, 7));
-        computables.add(new Pentagon(5, 5, 5, 5, 5));
-        computables.add(new Hexagon(2, 2, 2, 2, 2, 2));
+        ArrayList<Computable> computables = new ArrayList<Computable>();
+        computables.add(new TriangleEquilateral(6));
+        computables.add(new Square(7));
+        computables.add(new Pentagon(5));
+        computables.add(new Hexagon(2));
 
         assertThat("Number of sides is not correct", computables.get(0).calculatePerimeter(), closeTo(18.0, 0.0));
         assertThat("Number of sides is not correct", computables.get(1).calculatePerimeter(), closeTo(28.0, 0.0));
@@ -46,10 +46,10 @@ public class IComputableTest {
 
     @Test
     public void testCateLaturiAmEuOare() throws Exception {
-        TriangleEquilateral triangle = new TriangleEquilateral(6, 6, 6);
-        Square square = new Square(7, 7, 7, 7);
-        Pentagon pentagon = new Pentagon(5, 5, 5, 5, 5);
-        Hexagon hexagon = new Hexagon(2, 2, 2, 2, 2, 2);
+        TriangleEquilateral triangle = new TriangleEquilateral(6);
+        Square square = new Square(7);
+        Pentagon pentagon = new Pentagon(5);
+        Hexagon hexagon = new Hexagon(2);
 
 
         assertThat("Number of sides is not correct", triangle.cateLaturiAmEuOare(), containsString("3"));
@@ -58,32 +58,26 @@ public class IComputableTest {
         assertThat("Number of sides is not correct", hexagon.cateLaturiAmEuOare(), containsString("6"));
     }
 
-    @Test
-    public void testTriangleNotPoligon() throws CannotFormShape {
-        thrown.expect(CannotFormShape.class);
-        thrown.expectMessage("No side should be bigger than the sum of the other sides !!!");
-        AbstractPolygon triangle = new TriangleEquilateral(6, 6, 20);
-    }
 
     @Test
     public void testTriangleZeroOnSide() throws CannotFormShape {
         thrown.expect(CannotFormShape.class);
         thrown.expectMessage("Side is below 0 !!!");
-        AbstractPolygon triangle1 = new Pentagon(6, 6, 0, 6, 6);
+        AbstractPolygon triangle1 = new Pentagon(0);
     }
 
     @Test
     public void testTriangleNotAllEqual() throws CannotFormShape {
         thrown.expect(CannotFormShape.class);
-        thrown.expectMessage("This cannot be a hexagon, it doesnt have 6 equal sides");
-        AbstractPolygon triangle1 = new Hexagon(6, 3, 5, 6, 6, 4);
+        thrown.expectMessage("Side is below 0 !!!");
+        AbstractPolygon triangle1 = new Hexagon(0);
     }
 
     @Test
     public void testTriangleNegativeSide() throws CannotFormShape {
         thrown.expect(CannotFormShape.class);
         thrown.expectMessage("Side is below 0 !!!");
-        AbstractPolygon triangle1 = new Square(6, -6, 6, 6);
+        AbstractPolygon triangle1 = new Square(-6);
     }
 
 }

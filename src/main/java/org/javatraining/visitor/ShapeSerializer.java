@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by Sergiu Vidrascu on 5/24/15.
  */
-public class ShapeSerializer implements IShapeVisitor {
+public class ShapeSerializer implements ShapeVisitor {
 
     private double areaCalculation = 0;
     private String sidesNumber = "";

@@ -3,7 +3,7 @@ package org.javatraining;
 /**
  * Created by Sergiu Vidrascu on 5/5/2015.
  */
-public interface ICongruentClub {
+public interface CongruentShape {
 
     String rotate();
 

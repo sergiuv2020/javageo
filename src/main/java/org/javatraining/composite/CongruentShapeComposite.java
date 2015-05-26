@@ -1,6 +1,6 @@
 package org.javatraining.composite;
 
-import org.javatraining.ICongruentClub;
+import org.javatraining.CongruentShape;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,12 +8,13 @@ import java.util.List;
 /**
  * Created by Sergiu Vidrascu on 5/24/15.
  */
-public class CompositeParty implements ICongruentClub {
-    private List<ICongruentClub> childMembers = new ArrayList<ICongruentClub>();
+public class CongruentShapeComposite implements CongruentShape {
+
+    private List<CongruentShape> childMembers = new ArrayList<CongruentShape>();
 
     public String rotate() {
         String rotate = "";
-        for (ICongruentClub childMember : childMembers) {
+        for (CongruentShape childMember : childMembers) {
             rotate = rotate + childMember.rotate();
         }
         return rotate;
@@ -21,7 +22,7 @@ public class CompositeParty implements ICongruentClub {
 
     public String explode() {
         String explode = "";
-        for (ICongruentClub childMember : childMembers) {
+        for (CongruentShape childMember : childMembers) {
             explode = explode + childMember.explode();
         }
         return explode;
@@ -29,17 +30,17 @@ public class CompositeParty implements ICongruentClub {
 
     public String dance() {
         String dancing = "";
-        for (ICongruentClub childMember : childMembers) {
+        for (CongruentShape childMember : childMembers) {
             dancing = dancing + childMember.dance();
         }
         return dancing;
     }
 
-    public void add(ICongruentClub clubMember) {
+    public void add(CongruentShape clubMember) {
         childMembers.add(clubMember);
     }
 
-    public void remove(ICongruentClub clubMember) {
+    public void remove(CongruentShape clubMember) {
         childMembers.remove(clubMember);
     }
 

@@ -2,7 +2,7 @@ package org.javatraining.shapes;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.ICongruentClub;
+import org.javatraining.CongruentShape;
 import org.javatraining.exceptions.CannotFormShape;
 
 /**
@@ -12,16 +12,10 @@ import org.javatraining.exceptions.CannotFormShape;
 /**
  * "Leaf"
  */
-public class Hexagon extends AbstractPolygon implements ICongruentClub {
+public class Hexagon extends CongruentPolygon {
 
-    private double side1;
-
-    public Hexagon(double side1, double side2, double side3, double side4, double side5, double side6) throws CannotFormShape {
-        super(side1, side2, side3, side4, side5, side6);
-        if (side1 != side2 || side2 != side3 || side3 != side4 || side4 != side5 || side5 != side6) {
-            throw new CannotFormShape("This cannot be a hexagon, it doesnt have 6 equal sides");
-        }
-        this.side1 = side1;
+    public Hexagon(double side) throws CannotFormShape {
+        super(side ,6);
     }
 
     public double calculateArea() {

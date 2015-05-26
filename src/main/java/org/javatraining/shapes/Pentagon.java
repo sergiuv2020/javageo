@@ -1,7 +1,7 @@
 package org.javatraining.shapes;
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.ICongruentClub;
+import org.javatraining.CongruentShape;
 import org.javatraining.exceptions.CannotFormShape;
 
 /**
@@ -11,16 +11,10 @@ import org.javatraining.exceptions.CannotFormShape;
 /**
  * "Leaf"
  */
-public class Pentagon extends AbstractPolygon implements ICongruentClub {
+public class Pentagon extends CongruentPolygon {
 
-    private double side1;
-
-    public Pentagon(double side1, double side2, double side3, double side4, double side5) throws CannotFormShape {
-        super(side1, side2, side3, side4, side5);
-        if (side1 != side2 || side2 != side3 || side3 != side4 || side4 != side5) {
-            throw new CannotFormShape("This cannot be a pentagon, it doesnt have 5 equal sides");
-        }
-        this.side1 = side1;
+    public Pentagon(double side) throws CannotFormShape {
+        super(side , 5);
     }
 
     public double calculateArea() {

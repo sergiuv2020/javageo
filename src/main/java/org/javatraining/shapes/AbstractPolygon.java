@@ -2,12 +2,13 @@ package org.javatraining.shapes;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.IComputable;
+import org.javatraining.Computable;
 import org.javatraining.exceptions.CannotFormShape;
-import org.javatraining.visitor.IShapeElement;
-import org.javatraining.visitor.IShapeVisitor;
+import org.javatraining.visitor.ShapeElement;
+import org.javatraining.visitor.ShapeVisitor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by svidrascu on 5/4/2015.
@@ -16,19 +17,23 @@ import java.util.ArrayList;
 /**
  * "Composite"
  */
-public abstract class AbstractPolygon implements IShapeElement, IComputable {
+public abstract class AbstractPolygon implements ShapeElement, Computable {
 
 
-    private ArrayList<Double> poligonSides = new ArrayList<Double>();
+    private List<Double> poligonSides = new ArrayList<Double>();
 
-    public AbstractPolygon(double... sides) throws CannotFormShape {
+    public AbstractPolygon(List<Double> sides) throws CannotFormShape {
+
         for (Double side : sides) {
             if (side < 1) {
                 throw new CannotFormShape("Side is below 0 !!!");
-            } else
-                this.poligonSides.add(side);
+            }
         }
+
+        this.poligonSides.addAll(sides);
+
         double perimeter = this.calculatePerimeter();
+
         for (Double poligonSide : poligonSides) {
             if (poligonSide > perimeter - poligonSide) {
                 throw new CannotFormShape("No side should be bigger than the sum of the other sides !!!");
@@ -41,18 +46,18 @@ public abstract class AbstractPolygon implements IShapeElement, IComputable {
     final public double calculatePerimeter() {
         System.out.println("Formula magica pentru calculat perimetrul unui " +
                 StringUtils.substringAfter(this.getClass().toString(), "javatraining."));
+
         double rezultat = 0;
+
         for (double poligonSide : poligonSides) {
             rezultat = rezultat + poligonSide;
         }
         return rezultat;
     }
 
-    public double calculateArea() {
-        return 0;
-    }
+    public abstract double calculateArea();
 
-    public void serialize(IShapeVisitor visitor) throws CannotFormShape {
+    public void serialize(ShapeVisitor visitor) throws CannotFormShape {
         visitor.visit(this);
     }
 

@@ -5,7 +5,7 @@ package org.javatraining;
  */
 
 import org.apache.commons.lang3.StringUtils;
-import org.javatraining.composite.CompositeParty;
+import org.javatraining.composite.CongruentShapeComposite;
 import org.javatraining.exceptions.CannotFormShape;
 import org.javatraining.shapes.*;
 import org.javatraining.visitor.ShapeSerializer;
@@ -24,10 +24,10 @@ public class HomePage {
     @RequestMapping("/")
     String home() throws CannotFormShape, IOException {
         List<AbstractPolygon> abstractPolygons = new ArrayList<AbstractPolygon>();
-        abstractPolygons.add(new Hexagon(2, 2, 2, 2, 2, 2));
-        abstractPolygons.add(new Square(7, 7, 7, 7));
-        abstractPolygons.add(new Pentagon(5, 5, 5, 5, 5));
-        abstractPolygons.add(new TriangleEquilateral(6, 6, 6));
+        abstractPolygons.add(new Hexagon(2));
+        abstractPolygons.add(new Square(7));
+        abstractPolygons.add(new Pentagon(5));
+        abstractPolygons.add(new TriangleEquilateral(6));
 
         String text = "";
 
@@ -47,14 +47,14 @@ public class HomePage {
      */
     @RequestMapping("/club")
     String club() throws CannotFormShape {
-        Hexagon hexagon = new Hexagon(2, 2, 2, 2, 2, 2);
-        TriangleEquilateral triunghi = new TriangleEquilateral(6, 6, 6);
-        Pentagon pentagon = new Pentagon(5, 5, 5, 5, 5);
-        Square square = new Square(7, 7, 7, 7);
+        CongruentShape hexagon = new Hexagon(2);
+        CongruentShape triunghi = new TriangleEquilateral(6);
+        CongruentShape pentagon = new Pentagon(5);
+        CongruentShape square = new Square(7);
 
-        CompositeParty majorParty = new CompositeParty();
-        CompositeParty party1 = new CompositeParty();
-        CompositeParty party2 = new CompositeParty();
+        CongruentShapeComposite majorParty = new CongruentShapeComposite();
+        CongruentShapeComposite party1 = new CongruentShapeComposite();
+        CongruentShapeComposite party2 = new CongruentShapeComposite();
 
         party1.add(triunghi);
         party1.add(hexagon);
@@ -78,13 +78,14 @@ public class HomePage {
 
     @RequestMapping("/area")
     String area() throws CannotFormShape {
-        ArrayList<IComputable> computables = new ArrayList<IComputable>();
-        computables.add(new Hexagon(2, 2, 2, 2, 2, 2));
-        computables.add(new Pentagon(5, 5, 5, 5, 5));
-        computables.add(new TriangleEquilateral(6, 6, 6));
-        computables.add(new Square(7, 7, 7, 7));
+        ArrayList<Computable> computables = new ArrayList<Computable>();
+        computables.add(new Hexagon(2));
+        computables.add(new Pentagon(5));
+        computables.add(new TriangleEquilateral(6));
+        computables.add(new Square(7));
+
         String text = "<b><i> PARTYYYYYYY !!!! </i></b> <br>";
-        for (IComputable computable : computables) {
+        for (Computable computable : computables) {
             text = text + StringUtils.substringAfter(computable.getClass().toString(), "shapes.") + " " + computable.calculateArea() + "<br>";
         }
 
@@ -95,13 +96,13 @@ public class HomePage {
 
     @RequestMapping("/perimeter")
     String perimeter() throws CannotFormShape {
-        ArrayList<IComputable> computables = new ArrayList<IComputable>();
-        computables.add(new Hexagon(2, 2, 2, 2, 2, 2));
-        computables.add(new Pentagon(5, 5, 5, 5, 5));
-        computables.add(new TriangleEquilateral(6, 6, 6));
-        computables.add(new Square(7, 7, 7, 7));
+        ArrayList<Computable> computables = new ArrayList<Computable>();
+        computables.add(new Hexagon(2));
+        computables.add(new Pentagon(5));
+        computables.add(new TriangleEquilateral(6));
+        computables.add(new Square(7));
         String text = "<b><i> PARTYYYYYYY !!!! </i></b> <br>";
-        for (IComputable computable : computables) {
+        for (Computable computable : computables) {
             text = text + StringUtils.substringAfter(computable.getClass().toString(), "shapes.") + " " + computable.calculatePerimeter() + "<br>";
         }
 
@@ -119,10 +120,10 @@ public class HomePage {
     @RequestMapping(value = "/shapes.json", method = RequestMethod.GET)
     public void getFile(HttpServletResponse response) throws IOException, CannotFormShape {
         List<AbstractPolygon> abstractPolygons = new ArrayList<AbstractPolygon>();
-        abstractPolygons.add(new Hexagon(2, 2, 2, 2, 2, 2));
-        abstractPolygons.add(new Square(7, 7, 7, 7));
-        abstractPolygons.add(new Pentagon(5, 5, 5, 5, 5));
-        abstractPolygons.add(new TriangleEquilateral(6, 6, 6));
+        abstractPolygons.add(new Hexagon(2));
+        abstractPolygons.add(new Square(7));
+        abstractPolygons.add(new Pentagon(5));
+        abstractPolygons.add(new TriangleEquilateral(6));
 
         ShapeSerializer savedData = new ShapeSerializer();
         byte[] shapeData = savedData.generateJsonforShapes(abstractPolygons);
