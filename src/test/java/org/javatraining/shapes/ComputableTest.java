@@ -28,7 +28,7 @@ public class ComputableTest {
         assertThat("Area calculation is not correct", square.calculateArea(), closeTo(49.0, 0.0));
 
         Computable triunghi = new TriangleEquilateral(6);
-        assertThat("Area calculation is not correct", triunghi.calculateArea(), closeTo(15.588457268119896, 0.0));
+        assertThat("Area calculation is not correct", triunghi.calculateArea(), closeTo(15.5884, 0.0));
     }
 
     @Test
