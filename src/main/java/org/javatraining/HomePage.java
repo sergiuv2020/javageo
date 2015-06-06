@@ -145,12 +145,11 @@ public class HomePage {
 
     @RequestMapping(value="/upload",method=RequestMethod.POST)
     public @ResponseBody String handleFileUpload(HttpServletResponse response,
-                                                 @RequestParam("name") String name,
                                                  @RequestParam("file") File file) throws IOException, CannotFormShape {
         byte[] shapeData;
         ShapeSerializer savedData = new ShapeSerializer();
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename="+name+"shapes.json");
+        response.setHeader("Content-Disposition", "attachment;filename=calculation.json");
 
         try {
             shapeData = savedData.generateJsonforShapes(savedData.jsonDeserializer(file));
@@ -158,7 +157,7 @@ public class HomePage {
             response.flushBuffer();
             return "";
         } catch (Exception e) {
-            return "You failed to upload " + name + " => " + e.getMessage();
+            return "You failed to upload your file => " + e.getMessage();
         }
     }
 }
