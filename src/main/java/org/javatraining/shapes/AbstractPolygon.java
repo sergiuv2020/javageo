@@ -1,6 +1,8 @@
 package org.javatraining.shapes;
 
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.javatraining.Computable;
 import org.javatraining.exceptions.CannotFormShape;
@@ -17,10 +19,15 @@ import java.util.List;
 /**
  * "Composite"
  */
+@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY,property = "@shape")
 public abstract class AbstractPolygon implements ShapeElement, Computable {
 
-
+    private double perimeter;
     private List<Double> poligonSides = new ArrayList<Double>();
+
+    public double getPerimeter() {
+        return perimeter;
+    }
 
     public AbstractPolygon(List<Double> sides) throws CannotFormShape {
 
@@ -31,8 +38,7 @@ public abstract class AbstractPolygon implements ShapeElement, Computable {
         }
 
         this.poligonSides.addAll(sides);
-
-        double perimeter = this.calculatePerimeter();
+        this.perimeter = this.calculatePerimeter();
 
         for (Double poligonSide : poligonSides) {
             if (poligonSide > perimeter - poligonSide) {
@@ -54,8 +60,6 @@ public abstract class AbstractPolygon implements ShapeElement, Computable {
         }
         return rezultat;
     }
-
-    public abstract double calculateArea();
 
     public void serialize(ShapeVisitor visitor) throws CannotFormShape {
         visitor.visit(this);

@@ -1,5 +1,8 @@
 package org.javatraining.shapes;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.javatraining.CongruentShape;
 import org.javatraining.exceptions.CannotFormShape;
@@ -11,19 +14,30 @@ import org.javatraining.exceptions.CannotFormShape;
 /**
  * "Leaf"
  */
-public class Square extends CongruentPolygon {
 
+//@JsonRootName(value = "Square")
+public class Square extends CongruentPolygon  implements CongruentShape{
 
-    public Square(double side) throws CannotFormShape {
+    private double area;
+
+    public double getArea() {
+        return area;
+    }
+
+    public void setArea(double area) {
+        this.area = area;
+
+    }
+    public Square(@JsonProperty("side") double side) throws CannotFormShape {
         super(side , 4);
+        this.area=calculateArea();
     }
 
     final public double calculateArea() {
         System.out.println("Formula magica pentru calculat aria unui " +
                 StringUtils.substringAfter(this.getClass().toString(), "shapes."));
-
-        double area;
-        area = getSide() * getSide();
+        double side = super.getSide().get(0);
+        double area = side * side;
         return area;
     }
 

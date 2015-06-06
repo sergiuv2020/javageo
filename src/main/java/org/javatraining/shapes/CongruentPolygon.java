@@ -17,14 +17,15 @@ import java.util.List;
  */
 public abstract class CongruentPolygon extends AbstractPolygon implements CongruentShape {
 
-    private double side;
+
+    private List<Double> sides;
 
     public CongruentPolygon(double side, double counter) throws CannotFormShape {
         super(createPolygonSides(side, counter));
         if (side <= 0) {
-            throw new CannotFormShape("This cannot be a valid hexagon (side must be an positive number)");
+            throw new CannotFormShape("This cannot be a congruent poligon (side must be an positive number)");
         }
-        this.side = side;
+        this.sides = createPolygonSides(side, counter);
     }
 
     protected static List<Double> createPolygonSides(double side, double counter) {
@@ -35,7 +36,8 @@ public abstract class CongruentPolygon extends AbstractPolygon implements Congru
         return doubles;
     }
 
-    public double getSide() {
-        return side;
+    public List<Double> getSide() {
+        return sides;
     }
+
 }

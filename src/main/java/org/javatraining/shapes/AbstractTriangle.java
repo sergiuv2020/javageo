@@ -20,12 +20,6 @@ public abstract class AbstractTriangle extends AbstractPolygon {
     }
 
 
-    final public double calculateArea() {
-        System.out.println("Formula magica pentru calculat aria unui " +
-                StringUtils.substringAfter(this.getClass().toString(), "shapes."));
-        double area;
-        area = (Math.sqrt((side3 + side1 + side2) * (side1 + side2 - side3) * (side3 - side1 + side2) * (side3 + side1 - side2))) / 4;
-        return area;
-    }
+
 
 }

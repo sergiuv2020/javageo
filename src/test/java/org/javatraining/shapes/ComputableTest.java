@@ -2,10 +2,12 @@ package org.javatraining.shapes;
 
 import org.javatraining.Computable;
 import org.javatraining.exceptions.CannotFormShape;
+import org.javatraining.visitor.ShapeSerializer;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.io.*;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -80,4 +82,15 @@ public class ComputableTest {
         AbstractPolygon triangle1 = new Square(-6);
     }
 
+    @Test
+    public void testDeserialize() throws IOException, CannotFormShape {
+        File test = new File("/home/svidrascu/Downloads/input.json");
+//        System.out.println(test.toString());
+//        ShapeSerializer serializator = new ShapeSerializer();
+//        ByteArrayOutputStream stream =
+//                new ByteArrayOutputStream(new FileOutputStream(test));
+//
+//        System.out.println(serializator.jsonDeserializer(stream.toByteArray()));
+//        System.out.println("magic");
+    }
 }

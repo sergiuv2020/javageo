@@ -9,11 +9,13 @@ import org.javatraining.composite.CongruentShapeComposite;
 import org.javatraining.exceptions.CannotFormShape;
 import org.javatraining.shapes.*;
 import org.javatraining.visitor.ShapeSerializer;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -117,8 +119,8 @@ public class HomePage {
 //        return new FileSystemResource(fileName);
 //    }
 
-    @RequestMapping(value = "/shapes.json", method = RequestMethod.GET)
-    public void getFile(HttpServletResponse response) throws IOException, CannotFormShape {
+    @RequestMapping(value = "/testshapes.json", method = RequestMethod.GET)
+    public void getTestFile(HttpServletResponse response) throws IOException, CannotFormShape {
         List<AbstractPolygon> abstractPolygons = new ArrayList<AbstractPolygon>();
         abstractPolygons.add(new Hexagon(2));
         abstractPolygons.add(new Square(7));
@@ -135,4 +137,28 @@ public class HomePage {
         response.flushBuffer();
     }
 
+    @RequestMapping(value="/upload", method=RequestMethod.GET)
+    public @ResponseBody
+    String provideUploadInfo() {
+        return "You can upload a file by posting to this same URL.";
+    }
+
+    @RequestMapping(value="/upload",method=RequestMethod.POST)
+    public @ResponseBody String handleFileUpload(HttpServletResponse response,
+                                                 @RequestParam("name") String name,
+                                                 @RequestParam("file") File file) throws IOException, CannotFormShape {
+        byte[] shapeData;
+        ShapeSerializer savedData = new ShapeSerializer();
+        response.setContentType("application/octet-stream");
+        response.setHeader("Content-Disposition", "attachment;filename=shapes.json");
+
+        try {
+            shapeData = savedData.generateJsonforShapes(savedData.jsonDeserializer(file));
+            response.getOutputStream().write(shapeData);
+            response.flushBuffer();
+            return "";
+        } catch (Exception e) {
+            return "You failed to upload " + name + " => " + e.getMessage();
+        }
+    }
 }
