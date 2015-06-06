@@ -19,7 +19,16 @@ import java.util.List;
 /**
  * "Composite"
  */
-@JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY,property = "@shape")
+@JsonTypeInfo(use=JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "@shape")
+@JsonSubTypes(
+        {
+                @JsonSubTypes.Type(name="TriangleEquilateral", value = TriangleEquilateral.class),
+                @JsonSubTypes.Type(name="Hexagon", value = Hexagon.class),
+                @JsonSubTypes.Type(name="Pentagon", value = Pentagon.class),
+                @JsonSubTypes.Type(name="Square", value = Square.class)
+        })
 public abstract class AbstractPolygon implements ShapeElement, Computable {
 
     private double perimeter;

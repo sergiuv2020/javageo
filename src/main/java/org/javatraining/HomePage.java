@@ -150,7 +150,7 @@ public class HomePage {
         byte[] shapeData;
         ShapeSerializer savedData = new ShapeSerializer();
         response.setContentType("application/octet-stream");
-        response.setHeader("Content-Disposition", "attachment;filename=shapes.json");
+        response.setHeader("Content-Disposition", "attachment;filename="+name+"shapes.json");
 
         try {
             shapeData = savedData.generateJsonforShapes(savedData.jsonDeserializer(file));

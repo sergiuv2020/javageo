@@ -82,15 +82,13 @@ public class ComputableTest {
         AbstractPolygon triangle1 = new Square(-6);
     }
 
-    @Test
-    public void testDeserialize() throws IOException, CannotFormShape {
-        File test = new File("/home/svidrascu/Downloads/input.json");
+//    @Test
+//    public void testDeserialize() throws IOException, CannotFormShape {
+//        File test = new File("/home/svidrascu/Downloads/input.json");
 //        System.out.println(test.toString());
 //        ShapeSerializer serializator = new ShapeSerializer();
-//        ByteArrayOutputStream stream =
-//                new ByteArrayOutputStream(new FileOutputStream(test));
 //
-//        System.out.println(serializator.jsonDeserializer(stream.toByteArray()));
+//        System.out.println(serializator.jsonDeserializer(test));
 //        System.out.println("magic");
-    }
+//    }
 }
